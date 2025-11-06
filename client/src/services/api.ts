@@ -75,7 +75,15 @@ export const login = (
   return api.post<LoginResponse>('/users/login', { email, password, userType });
 };
 
-
+export const register = (
+  name: string,
+  email: string,
+  password: string,
+  role: 'admin' | 'worker' | 'citizen',
+  department?: string
+): Promise<AxiosResponse<LoginResponse>> => {
+  return api.post<LoginResponse>('/users/register', { name, email, password, role, department });
+};
 
 export const getProfile = (): Promise<AxiosResponse<User>> => {
   return api.get<User>('/users/profile');

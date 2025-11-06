@@ -1,12 +1,14 @@
 import express from 'express';
 import multer from 'multer';
-import { getAllLeaks, createLeak, updateLeakStatus } from '../controllers/leakController';
+import type { Request } from 'express';
+import type { Multer } from 'multer';
+import { getAllLeaks, createLeak, updateLeakStatus } from '../controllers/leakController.js';
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: 'uploads/',
-  filename: (_req, file, cb) => {  // Changed: req to _req (prefix with underscore)
+  filename: (_req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
     cb(null, Date.now() + '-' + file.originalname);
   }
 });

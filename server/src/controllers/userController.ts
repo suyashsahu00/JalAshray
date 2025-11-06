@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import pool from '../config/database';
+import pool from '../config/database.js';
 // Remove bcrypt import for now since we're not using it
 import jwt from 'jsonwebtoken';
 

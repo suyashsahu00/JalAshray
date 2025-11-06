@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import leakRoutes from './routes/leakRoutes';
-import userRoutes from './routes/userRoutes';
+import leakRoutes from './routes/leakRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 

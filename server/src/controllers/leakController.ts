@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import pool from '../config/database';
+import pool from '../config/database.js';
+import { CustomRequest } from '../middleware/auth.js'; // Assuming you have this type
 import type { ResultSetHeader } from 'mysql2';  // Add this import
 
 export const getAllLeaks = async (_req: Request, res: Response): Promise<void> => {
@@ -11,9 +12,10 @@ export const getAllLeaks = async (_req: Request, res: Response): Promise<void> =
   }
 };
 
-export const createLeak = async (req: Request, res: Response): Promise<void> => {
+export const createLeak = async (req: CustomRequest, res: Response): Promise<void> => {
   try {
-    const { location, latitude, longitude, severity, description, reported_by } = req.body;
+    const { location, latitude, longitude, severity, description } = req.body;
+    const reported_by = req.userId; // Assuming userId is set by auth middleware on CustomRequest
     const photo_url = req.file ? `/uploads/${req.file.filename}` : null;
 
     const [result] = await pool.query<ResultSetHeader>(
@@ -21,7 +23,7 @@ export const createLeak = async (req: Request, res: Response): Promise<void> => 
       [location, latitude, longitude, severity, description, reported_by, photo_url, 'active']
     );
 
-    res.status(201).json({ 
+    res.status(201).json({
       id: result.insertId, 
       message: 'Leak reported successfully' 
     });

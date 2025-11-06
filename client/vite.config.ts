@@ -10,8 +10,8 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
         name: 'JalAshray',
-        short_name: 'Pipeline Guardian',
-        description: 'Government of India - Water Pipeline Monitoring System',
+        short_name: 'JalAshray',
+        description: 'Government Water Management System',
         theme_color: '#1565C0',
         background_color: '#ffffff',
         display: 'standalone',
